@@ -1,0 +1,33 @@
+[package]
+name = "my-microservice"
+version = "0.1.0"
+edition = "2021"
+
+
+[[bin]]
+name = "client"
+path = "src/client/main.rs"
+
+[[bin]]
+name = "auth"
+path = "src/auth-service/main.rs"
+
+[[bin]]
+name = "health-check"
+path = "src/health-check-service/main.rs"
+
+
+[dependencies]
+tonic = "0.12.1"
+tokio = { version = "1.39", features = ["rt-multi-thread", "macros"] }
+pbkdf2 = { version = "0.12", features = ["simple"] }
+rand_core = { version = "0.6", features = ["std"] }
+uuid = { version = "1.10", features = ["v4"] }
+prost = "0.13.1"
+log = "0.4.22"
+pretty_env_logger = "0.5"
+clap = { version = "4.5.16", features = ["derive"] }
+
+
+[build-dependencies]
+tonic-build = "0.12.1"

@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  health-check:
+    build:
+      context: .
+      dockerfile: health.Dockerfile
+    restart: "always"
+    depends_on:
+      auth:
+        condition: service_started
+  auth:
+    build:
+      context: .
+      dockerfile: auth.Dockerfile
+    restart: "always"
+    ports:
+      - "50051:50051"

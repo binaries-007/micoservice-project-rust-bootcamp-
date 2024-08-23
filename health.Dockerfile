@@ -1,4 +1,4 @@
-FROM rust:1.68.2-alpine3.17 AS chef
+FROM rust:1.74-alpine3.17 AS chef
 USER root
 # remove the line below when switching to >=rust:1.70.0. sparse mode is planned to be the default in Rust 1.70.0
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse

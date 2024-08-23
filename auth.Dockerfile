@@ -1,9 +1,9 @@
-FROM rust:1.68.2-alpine3.17 AS chef
+FROM rust:1.74-alpine3.17 AS chef
 USER root
 
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 RUN apk add --no-cache musl-dev \
-    & cargo install cargo chef
+    & cargo install cargo-chef
 WORKDIR /microservice-project
 
 

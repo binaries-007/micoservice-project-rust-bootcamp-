@@ -1,37 +1,37 @@
+name: Build, Test and Deploy to Prod
+
 on:
- push:
-  branches:
-   - master
-  pull_request:
-   branches:
-    - master
+  push:
+    branches:
+      - master
+
 jobs:
- build:
-  runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-  steps:
-  - name: Install protoc
-    uses: ardruino/setup-protoc@v1
-    
-  - name: Checkout code
-    uses: actions/checkout@v2
+    steps:
+      - name: Install protoc
+        uses: arduino/setup-protoc@v1
 
-  - name: Cache dependencies
-    uses: actions/cache@v3
-    with:
-     path: |
-      ~/.cargo
-      target/
-      key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock')}}
-      restore-keys: ${{ runner.os }}-cargo-
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-  - name: Install Rust
-    uses: actions-rs/toolchain@v1
-    with:
-     profile: minimal
-     toolchain: stable
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
 
-  - name: Build and test code
-    run: |
-     cargo build --verbose
-     cargo test --verbose
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+
+      - name: Build and test code
+        run: |
+          cargo build --verbose
+          cargo test --verbose
